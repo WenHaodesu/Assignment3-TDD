@@ -8,14 +8,16 @@ public class ColourTable {
     private final List<Integer> colors;
 
     public ColourTable(int size) {
-        if (size <= 1) {
-            throw new IllegalArgumentException("Invalid palette size: " + size);
-        }
-        if ((size & (size - 1)) != 0) {
-            throw new IllegalArgumentException("Invalid palette size: " + size);
-        }
+        validateParameter(size);
         this.size = size;
         this.colors = new ArrayList<>(size);
+    }
+
+    // Parameter validation method, eliminating duplicate code
+    private void validateParameter(int size) {
+        if (size <= 1 || (size & (size - 1)) != 0) {
+            throw new IllegalArgumentException("Invalid palette size: " + size);
+        }
     }
 
     public void add(int rgb) {
